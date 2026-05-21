@@ -21,11 +21,15 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "test": "jest"
   },
   "devDependencies": {
-    "@types/vscode": "^1.90.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.10",
     "typescript": "^5.0.0"
   },
   "dependencies": {
