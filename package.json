@@ -1,0 +1,36 @@
+{
+  "name": "antigravity-gemini-voice",
+  "displayName": "Anti-Gravity Gemini Voice Interface",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "antigravity.readSelection",
+        "title": "Gemini TTS: Sintetizar Texto Selecionado"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^4.0.0",
+    "@google/genai": "^0.2.0",
+    "play-sound": "^1.1.6"
+  }
+}

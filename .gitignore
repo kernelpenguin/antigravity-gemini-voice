@@ -1,0 +1,19 @@
+node_modules/
+out/
+.vscode-test/
+*.vsix
+
+# Configurações do VS Code
+.vscode/
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+
+# Credenciais e Variáveis de Ambiente (Segurança)
+.env
+*.pem
+*.key
+credentials.json
+client_secret.json
+service-account.json
