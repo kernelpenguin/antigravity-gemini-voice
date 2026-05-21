@@ -2,13 +2,13 @@
 
 ## 1. Visão Geral / Overview
 
-Este documento descreve a arquitetura da extensão **Anti-Gravity Gemini Voice Interface**. A solução converte texto selecionado em áudio por meio de integração com **Google Cloud Text-to-Speech** e executa a reprodução no sistema operacional, dentro do ambiente do **VS Code**.
+Este documento descreve a arquitetura da extensão **Anti-Gravity Gemini Voice Interface**. A solução transforma texto selecionado em áudio por meio da integração com **Google Cloud Text-to-Speech** e reproduz o resultado no sistema operacional, dentro do ambiente do **VS Code**.
 
-This document describes the architecture of the **Anti-Gravity Gemini Voice Interface** extension. The solution converts selected text into audio through **Google Cloud Text-to-Speech** integration and plays it back through the operating system, inside the **VS Code** environment.
+This document describes the architecture of the **Anti-Gravity Gemini Voice Interface** extension. The solution turns selected text into audio through **Google Cloud Text-to-Speech** integration and plays the result through the operating system, inside the **VS Code** environment.
 
-A implementação segue uma organização inspirada em **Clean Architecture**, com o caso de uso central isolado de detalhes de infraestrutura como a API do Google e o mecanismo de reprodução de áudio.
+A implementação segue uma abordagem inspirada em **Clean Architecture**, com o caso de uso central isolado de detalhes de infraestrutura, como a API do Google e o mecanismo de reprodução de áudio.
 
-The implementation follows a structure inspired by **Clean Architecture**, with the central use case isolated from infrastructure details such as the Google API and the audio playback mechanism.
+The implementation follows an approach inspired by **Clean Architecture**, with the central use case isolated from infrastructure details such as the Google API and the audio playback mechanism.
 
 ## 2. Princípios de Arquitetura / Architecture Principles
 
@@ -19,7 +19,7 @@ A organização do código segue estes princípios:
 - **Infraestrutura isolada**: a integração com o Google Cloud TTS e a reprodução via sistema operacional ficam concentradas em adaptadores.
 - **Testabilidade**: a interface do caso de uso permite testes unitários com mocks, sem chamadas reais à API externa nem execução de áudio no ambiente local.
 
-The code organization follows these principles:
+The code follows these principles:
 
 - **Separation of concerns**: the command orchestrates the flow; services handle synthesis and playback.
 - **Dependency on abstractions**: `ReadSelectionCommand` depends on interfaces (`ITtsProvider` and `IAudioPlayer`), not on concrete implementations.
