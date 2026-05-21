@@ -1,12 +1,19 @@
-# Documentação Arquitetural: Anti-Gravity Gemini Voice Interface
+# Anti-Gravity Gemini Voice Interface
 
 ## 1. Visão Geral
 
 Este documento descreve a arquitetura da extensão Anti-Gravity Gemini Voice Interface. A solução converte texto selecionado em áudio via integração com Google Cloud TTS, operando dentro do Extension Host do VS Code. O projeto implementa os princípios de Clean Architecture (Ports and Adapters).
 
-## 2. Diagrama de Casos de Uso
+## 2. Princípios de Arquitetura
 
-O diagrama abaixo mapeia as interações entre o Ator (Usuário do Editor) e o sistema.
+A organização do código segue os seguintes princípios:
+
+- **Separação de responsabilidades**: comando, provedores e reprodução de áudio ficam em camadas distintas.
+- **Dependência de abstrações**: o domínio depende de interfaces, não de implementações concretas.
+- **Infraestrutura isolada**: integração com Google Cloud TTS e player do sistema operacional fica concentrada em adaptadores.
+- **Testabilidade**: o uso de interfaces e mocks permite testes unitários sem acesso real a APIs externas.
+
+## 3. Diagrama de Casos de Uso
 
 ```mermaid
 usecaseDiagram
@@ -30,9 +37,7 @@ usecaseDiagram
     UC4 --> SO
 ```
 
-## 3. Diagrama de Classes (UML)
-
-A estrutura de classes demonstra a Inversão de Dependência. O domínio (`ReadSelectionCommand`) interage apenas com abstrações (`ITtsProvider` e `IAudioPlayer`).
+## 4. Diagrama de Classes (UML)
 
 ```mermaid
 classDiagram
@@ -68,9 +73,7 @@ classDiagram
     IAudioPlayer <|-- SystemAudioPlayer
 ```
 
-## 4. Diagrama de Sequência
-
-O fluxo de execução descreve o caminho dos dados desde o acionamento do comando até a limpeza de recursos.
+## 5. Fluxo de Execução
 
 ```mermaid
 sequenceDiagram
@@ -95,18 +98,37 @@ sequenceDiagram
             Command->>VSCode: showErrorMessage(erro)
         else Sucesso na API
             Command->>Audio: play(Uint8Array)
-            note over Audio: Escreve arquivo temp. no disco
+            note over Audio: Escreve arquivo temporário no disco
             Audio->>SO: Toca arquivo (.mp3)
             SO-->>Audio: Retorno do processo
-            note over Audio: Exclui arquivo temp. do disco
+            note over Audio: Exclui arquivo temporário do disco
             Audio-->>Command: Promise<void>
         end
     end
 ```
 
-## 5. Estratégia de Testes
+## 6. Estratégia de Testes
 
-Os testes validam o comportamento do domínio (`ReadSelectionCommand`), isolando a infraestrutura via *Mocks*. A suíte utiliza `Jest`.
+Os testes validam o comportamento do domínio (`ReadSelectionCommand`), isolando a infraestrutura por meio de mocks.
 
-* **Cobertura:** Casos de sucesso, tratamento de entradas inválidas (editor nulo, seleção vazia) e resiliência a falhas de API.
-* **Complexidade:** Isolamento garante tempo de execução `O(1)` nas suítes e prevenção de requisições reais para APIs tarifadas.
+- **Cobertura**: cenários de sucesso, entrada inválida e falhas de API.
+- **Objetivo**: garantir comportamento previsível sem depender de chamadas reais ao Google Cloud.
+- **Ferramenta**: Jest.
+
+## 7. Organização do repositório
+
+```text
+.
+├── src/
+├── docs/
+│   └── architecture.md
+├── __mocks__/
+├── LICENSE.md
+├── README.md
+├── package.json
+└── tsconfig.json
+```
+
+## 8. Licença
+
+Este projeto está licenciado sob a MIT License. Consulte [`LICENSE.md`](../LICENSE.md) no repositório raiz.
