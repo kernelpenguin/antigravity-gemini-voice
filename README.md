@@ -90,6 +90,8 @@ npm test
 
 Este projeto está licenciado sob a [MIT License](LICENSE.md).
 
+`LICENSE.md` é protegido por `CODEOWNERS` (`/LICENSE.md @kernelpenguin`) e deve ser alterado apenas por motivos legítimos (por exemplo, obrigação legal, ajuste de autoria ou clareza jurídica), com revisão explícita do owner e branch protection habilitada.
+
 ---
 
 ## English
@@ -177,3 +179,5 @@ npm test
 ### License
 
 This project is licensed under the [MIT License](LICENSE.md).
+
+`LICENSE.md` is protected by `CODEOWNERS` (`/LICENSE.md @kernelpenguin`) and should only be changed for legitimate reasons (for example, legal obligations, attribution updates, or legal clarity), with explicit owner review and branch protection enabled.
