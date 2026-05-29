@@ -2,7 +2,7 @@
 
 ## 1. Visão Geral
 
-Este documento descreve a arquitetura da extensão Anti-Gravity Gemini Voice Interface. A solução converte texto selecionado em áudio via integração com Google Cloud TTS, operando dentro do Extension Host do VS Code. O projeto implementa os princípios de Clean Architecture (Ports and Adapters).
+Este documento descreve a arquitetura da extensão Anti-Gravity Gemini Voice Interface. A solução converte texto selecionado em áudio via integração com Google Cloud TTS, operando dentro do Exten[...]
 
 ## 2. Princípios de Arquitetura
 
@@ -16,25 +16,22 @@ A organização do código segue os seguintes princípios:
 ## 3. Diagrama de Casos de Uso
 
 ```mermaid
-usecaseDiagram
-    actor Usuário as "Usuário (Dev)"
-    
-    package "Anti-Gravity Voice Extension" {
-        usecase UC1 as "Acionar Leitura de Seleção"
-        usecase UC2 as "Notificar Erro (Sem Seleção/Editor)"
-        usecase UC3 as "Sintetizar Áudio"
-        usecase UC4 as "Reproduzir Áudio"
-    }
-    
-    actor GCP as "Google Cloud TTS (API)"
-    actor SO as "Sistema Operacional (Áudio)"
+flowchart LR
+    user["Usuário (Dev)"]
+    gcp["Google Cloud TTS (API)"]
+    os["Sistema Operacional (Áudio)"]
 
-    Usuário --> UC1
-    UC1 ..> UC2 : <<extend>>
-    UC1 ..> UC3 : <<include>>
-    UC3 --> GCP
-    UC3 ..> UC4 : <<include>>
-    UC4 --> SO
+    uc1(["Acionar Leitura de Seleção"])
+    uc2(["Notificar Erro (Sem Seleção/Editor)"])
+    uc3(["Sintetizar Áudio"])
+    uc4(["Reproduzir Áudio"])
+
+    user --> uc1
+    uc1 -. "extend" .-> uc2
+    uc1 -. "include" .-> uc3
+    uc3 --> gcp
+    uc3 -. "include" .-> uc4
+    uc4 --> os
 ```
 
 ## 4. Diagrama de Classes (UML)
