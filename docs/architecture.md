@@ -24,25 +24,22 @@ A organização do código segue estes princípios:
 ### 3. Diagrama de Casos de Uso
 
 ```mermaid
-usecaseDiagram
-    actor Usuário as "Usuário / User"
-    
-    package "Anti-Gravity Gemini Voice Interface" {
-        usecase UC1 as "Acionar Leitura de Seleção / Trigger Selection Reading"
-        usecase UC2 as "Notificar Erro / Notify Error"
-        usecase UC3 as "Sintetizar Áudio / Synthesize Audio"
-        usecase UC4 as "Reproduzir Áudio / Play Audio"
-    }
-    
-    actor GCP as "Google Cloud TTS"
-    actor SO as "Sistema Operacional / Operating System"
+flowchart LR
+    user["Usuário / User"]
+    gcp["Google Cloud TTS"]
+    os["Sistema Operacional / Operating System"]
 
-    Usuário --> UC1
-    UC1 ..> UC2 : <<extend>>
-    UC1 ..> UC3 : <<include>>
-    UC3 --> GCP
-    UC3 ..> UC4 : <<include>>
-    UC4 --> SO
+    uc1(["Acionar Leitura de Seleção / Trigger Selection Reading"])
+    uc2(["Notificar Erro / Notify Error"])
+    uc3(["Sintetizar Áudio / Synthesize Audio"])
+    uc4(["Reproduzir Áudio / Play Audio"])
+
+    user --> uc1
+    uc1 -. "extend" .-> uc2
+    uc1 -. "include" .-> uc3
+    uc3 --> gcp
+    uc3 -. "include" .-> uc4
+    uc4 --> os
 ```
 
 ### 4. Diagrama de Classes
@@ -168,25 +165,22 @@ The code organization follows these principles:
 ### 3. Use Case Diagram
 
 ```mermaid
-usecaseDiagram
-    actor User as "User / Usuário"
-    
-    package "Anti-Gravity Gemini Voice Interface" {
-        usecase UC1 as "Trigger Selection Reading / Acionar Leitura de Seleção"
-        usecase UC2 as "Notify Error / Notificar Erro"
-        usecase UC3 as "Synthesize Audio / Sintetizar Áudio"
-        usecase UC4 as "Play Audio / Reproduzir Áudio"
-    }
-    
-    actor GCP as "Google Cloud TTS"
-    actor OS as "Operating System / Sistema Operacional"
+flowchart LR
+    user["User / Usuário"]
+    gcp["Google Cloud TTS"]
+    os["Operating System / Sistema Operacional"]
 
-    User --> UC1
-    UC1 ..> UC2 : <<extend>>
-    UC1 ..> UC3 : <<include>>
-    UC3 --> GCP
-    UC3 ..> UC4 : <<include>>
-    UC4 --> OS
+    uc1(["Trigger Selection Reading / Acionar Leitura de Seleção"])
+    uc2(["Notify Error / Notificar Erro"])
+    uc3(["Synthesize Audio / Sintetizar Áudio"])
+    uc4(["Play Audio / Reproduzir Áudio"])
+
+    user --> uc1
+    uc1 -. "extend" .-> uc2
+    uc1 -. "include" .-> uc3
+    uc3 --> gcp
+    uc3 -. "include" .-> uc4
+    uc4 --> os
 ```
 
 ### 4. Class Diagram
